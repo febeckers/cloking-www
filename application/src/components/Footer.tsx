@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
               {['FAQ', 'Tutoriais', 'Suporte', 'API Docs', 'Integrações'].map(item => (
                 <li key={item}>
                   <a 
-                    href={item === 'Suporte' ? 'https://api.whatsapp.com/send/?phone=5548991914011&text=Suporte' : '#'} 
+                    href={item === 'Suporte' ? 'https://api.whatsapp.com/send/?phone=556181718998&text=Suporte' : '#'} 
                     className="text-gray-400 hover:text-purple-400 transition-colors flex items-center gap-2"
                     target={item === 'Suporte' ? '_blank' : undefined}
                     rel={item === 'Suporte' ? 'noopener noreferrer' : undefined}
@@ -86,11 +86,11 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="h-5 w-5 text-purple-400 mt-0.5" />
-                <span>+55(48) 99191-4011</span>
+                <span>+55 (61) 8171-8998</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-purple-400 mt-0.5" />
-                <span>São Paulo, SP - Brasil</span>
+                <span>Brasília, DF - Brasil</span>
               </li>
             </ul>
           </div>
