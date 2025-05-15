@@ -1,0 +1,57 @@
+name: Deploy React Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.11.0'
+
+    - name: Install dependencies
+      run: yarn install
+      working-directory: ./application
+
+    - name: Build React app
+      working-directory: ./application
+      env:
+        VITE_PREFIX_TAG: production
+        VITE_APP_NAME: Cloking
+        VITE_APP_ENV: production
+        VITE_APP_DEBUG: false
+        VITE_APP_KEY: 
+        VITE_APP_MSW_DELAY: 1500
+      run: yarn build
+      
+
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: "0054clok"
+        key: ${{ secrets.SSH_KEY }}
+        port: 35035
+        script: |
+          cd /home/0054clok/web/cloking.com.br/public_html
+          rm -rf *
+          exit
+
+    - name: Upload build files
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: "0054clok"
+        key: ${{ secrets.SSH_KEY }}
+        port: 35035
+        source: "application/dist/**"
+        target: "/home/0054clok/web/cloking.com.br/public_html"
